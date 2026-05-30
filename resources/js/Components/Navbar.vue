@@ -7,6 +7,7 @@ const page = usePage();
 const user = computed(() => page.props.auth?.user);
 
 const dropdownOpen = ref(false);
+const isHomePage = computed(() => page.component === 'Home');
 
 const handleLogout = () => {
     dropdownOpen.value = false;
@@ -15,7 +16,7 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <nav class="nav">
+  <nav class="nav" :class="{ 'nav-dark': isHomePage }">
     <div class="nav-in">
       <div class="nav-col nav-left">
         <Link href="/" class="nav-logo-link">
@@ -322,5 +323,72 @@ const handleLogout = () => {
 @media (max-width: 600px) {
   .nav-btn-login { padding: 6px 12px; font-size: 11px; }
   .nav-btn-register { padding: 6px 12px; font-size: 11px; }
+}
+
+/* Dark glassmorphic override for landing page */
+.nav.nav-dark {
+  background: rgba(9, 11, 10, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.nav.nav-dark .nav-link {
+  color: #9ca3af;
+}
+.nav.nav-dark .nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+.nav.nav-dark .nav-link.active {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+.nav.nav-dark .nav-btn-login {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #d1d5db;
+}
+.nav.nav-dark .nav-btn-login:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+.nav.nav-dark .nav-btn-register {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+.nav.nav-dark .nav-btn-register:hover {
+  background-color: #16a34a;
+}
+.nav.nav-dark .nav-btn-notif {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #d1d5db;
+}
+.nav.nav-dark .nav-btn-notif:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+.nav.nav-dark .nav-btn-user {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #d1d5db;
+}
+.nav.nav-dark .user-dropdown {
+  background: #121614;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}
+.nav.nav-dark .user-dd-item {
+  color: #d1d5db;
+}
+.nav.nav-dark .user-dd-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.nav.nav-dark .user-dd-item strong {
+  color: #ffffff;
+}
+.nav.nav-dark .user-dd-logout {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+.nav.nav-dark .nav-logo {
+  filter: brightness(1.2);
 }
 </style>
