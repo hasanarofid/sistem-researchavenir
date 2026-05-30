@@ -43,9 +43,15 @@ esac
 
 # Pengecekan eksistensi file
 if [ ! -f "$ENV_FILE" ]; then
-  echo -e "${RED}❌ Error: File konfigurasi $ENV_FILE tidak ditemukan!${NC}"
-  echo "Pastikan Anda berada di direktori root 'sistem-researchavenir'."
-  exit 1
+  if [ -f "${ENV_FILE}.example" ]; then
+    echo "💡 File $ENV_FILE tidak ditemukan. Membuat dari template .example..."
+    cp "${ENV_FILE}.example" "$ENV_FILE"
+    echo -e "${BLUE}⚠️  Harap edit file $ENV_FILE untuk memasukkan key/credential Anda.${NC}"
+  else
+    echo -e "${RED}❌ Error: File konfigurasi $ENV_FILE tidak ditemukan!${NC}"
+    echo "Pastikan Anda berada di direktori root 'sistem-researchavenir'."
+    exit 1
+  fi
 fi
 
 echo "🔄 Mengganti environment ke: $ENV_TARGET"
