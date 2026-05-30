@@ -327,68 +327,72 @@ const handleLogout = () => {
 
 /* Dark glassmorphic override for landing page */
 .nav.nav-dark {
-  background: rgba(9, 11, 10, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 11, 10, 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
 }
 .nav.nav-dark .nav-link {
-  color: #9ca3af;
+  color: #9ca3af !important;
 }
 .nav.nav-dark .nav-link:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
 }
 .nav.nav-dark .nav-link.active {
-  background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15) !important;
+  color: #22c55e !important;
 }
 .nav.nav-dark .nav-btn-login {
-  border-color: rgba(255, 255, 255, 0.15);
-  color: #d1d5db;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #d1d5db !important;
+  background-color: transparent !important;
 }
 .nav.nav-dark .nav-btn-login:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 .nav.nav-dark .nav-btn-register {
-  background-color: #22c55e;
-  color: #ffffff;
+  background-color: #22c55e !important;
+  color: #ffffff !important;
 }
 .nav.nav-dark .nav-btn-register:hover {
-  background-color: #16a34a;
+  background-color: #16a34a !important;
 }
 .nav.nav-dark .nav-btn-notif {
-  border-color: rgba(255, 255, 255, 0.15);
-  color: #d1d5db;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #d1d5db !important;
+  background-color: transparent !important;
 }
 .nav.nav-dark .nav-btn-notif:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
 }
 .nav.nav-dark .nav-btn-user {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #d1d5db;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #d1d5db !important;
 }
 .nav.nav-dark .user-dropdown {
-  background: #121614;
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+  background: #121614 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5) !important;
 }
 .nav.nav-dark .user-dd-item {
-  color: #d1d5db;
+  color: #d1d5db !important;
 }
 .nav.nav-dark .user-dd-item:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 .nav.nav-dark .user-dd-item strong {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .nav.nav-dark .user-dd-logout {
-  border-top-color: rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
 }
 .nav.nav-dark .nav-logo {
-  filter: brightness(1.2);
+  filter: brightness(1.2) !important;
 }
 </style>
