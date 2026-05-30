@@ -1,58 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Research Avenir System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem inti dan platform analitik **Research Avenir** — sebuah platform berbasis web modern untuk menyajikan katalog riset dan artikel analisis pasar secara interaktif dan dinamis. 
 
-## About Laravel
+Aplikasi ini dikembangkan menggunakan arsitektur modern berkinerja tinggi yang menggabungkan backend kokoh dengan frontend yang responsif.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Aplikasi ini menggunakan teknologi standar startup profesional:
+* **Backend**: PHP 8.3 & Laravel 13 (Arsitektur MVC & API)
+* **Frontend Bridge**: Inertia.js (Menghubungkan Laravel controller langsung dengan Vue view secara seamless tanpa REST API manual)
+* **Frontend Framework**: Vue.js 3 (Composition API)
+* **Styling**: Tailwind CSS v4 & Vite
+* **Database**: PostgreSQL 15 (Docker) / SQLite (Local development)
+* **Containerization**: Docker & Docker Compose (Nginx Web Server, PHP-FPM App, PostgreSQL Database)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📂 Struktur Folder Proyek
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Untuk menjaga codebase tetap rapi dan profesional, repositori ini diatur dengan struktur berikut:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```text
+├── app/                      # Logika aplikasi backend (Controllers, Models, Middleware)
+│   └── website/              # HTML halaman web statis yang dibaca dinamis di runtime
+├── bootstrap/                # Skrip bootstrap Laravel
+├── config/                   # File konfigurasi aplikasi Laravel
+├── database/                 # Migrasi database, seeders, dan skema data
+│   └── seeders/              # Seeder data JSON & skrip PHP Seeder
+├── infra/                    # Konfigurasi infrastruktur & DevOps
+│   ├── docker/               # Dockerfile untuk container PHP-FPM
+│   ├── nginx/                # Konfigurasi server Nginx
+│   └── env/                  # File template environment (.env.local, .env.development, .env.production)
+├── public/                   # Asset publik (Gambar, logo, file kompilasi JS/CSS)
+├── resources/                # Komponen Vue 3 frontend, CSS, dan Views
+├── routes/                   # Definisi routing (web.php, api.php)
+├── scripts/                  # Skrip utility & parser data (Python/HTML pembantu) yang terpisah dari runtime utama
+├── storage/                  # Log, cache, dan file upload lokal
+├── tests/                    # Pengujian otomatis (Unit & Feature tests)
+├── switch-env.sh             # Skrip otomatis untuk mengganti file environment (.env)
+├── docker-compose.yml        # Konfigurasi orkestrasi container Docker
+└── artisan                   # Command-line tool utilitas Laravel
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## ⚙️ Panduan Setup & Instalasi Lokal
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 1. Prasyarat
+Pastikan sistem Anda sudah terinstal:
+* [Docker & Docker Compose](https://docs.docker.com/get-docker/)
+* [Node.js (LTS)](https://nodejs.org/)
+* [Composer](https://getcomposer.org/) (Opsional jika menggunakan container)
 
-## Code of Conduct
+### 2. Mengatur Environment
+Gunakan skrip `switch-env.sh` untuk mengaktifkan konfigurasi environment target Anda:
+```bash
+# Untuk pengembangan lokal (Local development)
+bash switch-env.sh local
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Untuk environment development/staging
+bash switch-env.sh dev
 
-## Security Vulnerabilities
+# Untuk environment production
+bash switch-env.sh prod
+```
+*Skrip di atas akan menyalin konfigurasi dari `infra/env/` ke `.env` utama di root folder.*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3. Menjalankan Docker Container
+Jalankan seluruh layanan aplikasi (Web Server, App, dan Database) menggunakan Docker Compose:
+```bash
+docker compose up -d --build
+```
+Aplikasi akan otomatis berjalan di port port yang ditentukan (default local: `http://localhost:8080`).
 
-## License
+### 4. Instalasi Dependency & Build Assets
+Jalankan perintah berikut untuk menginstal dependency frontend dan backend:
+```bash
+# Masuk ke container app untuk menjalankan perintah Laravel
+docker compose exec app composer install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Generate key enkripsi Laravel
+docker compose exec app php artisan key:generate
+
+# Instal dependensi JavaScript & kompilasi aset frontend
+npm install
+npm run build
+```
+
+### 5. Migrasi & Seed Database
+Jalankan migrasi database dan masukkan data awal (seeding):
+```bash
+docker compose exec app php artisan migrate --seed
+```
+
+---
+
+## 🛠️ Skrip Utility & Parser (`scripts/`)
+
+Di dalam folder `scripts/` terdapat skrip utilitas Python yang digunakan untuk mengekstrak dan memproses data dari file HTML ke database format JSON:
+* **`scripts/parse_seeders.py`**: Mengekstrak data katalog dari `app/website/katalog.html` dan `index.html`, lalu menyimpannya dalam format JSON di `database/seeders/` untuk kemudian di-seed ke database PostgreSQL.
+* **`scripts/extract_logo.py`**: Mengekstrak file logo base64 dari JavaScript lama dan menyimpannya sebagai file gambar fisik di `public/images/logo.png`.
+
+*Catatan: Selalu jalankan skrip Python dari root direktori proyek, contoh:*
+```bash
+python scripts/parse_seeders.py
+```
+
+---
+
+## 🐳 Deployment Produksi
+
+Untuk melakukan deployment ke VPS Produksi secara cepat dan otomatis, Anda dapat menjalankan skrip deploy produksi yang telah disediakan:
+```bash
+bash infra/deploy-prod.sh
+```
+Skrip ini akan secara otomatis menarik pembaruan kode, beralih ke `.env.production`, dan melakukan rebuild container Docker dengan aman.

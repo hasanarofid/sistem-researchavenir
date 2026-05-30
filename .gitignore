@@ -25,3 +25,9 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Ignore active environment config files in infra/env/
+/infra/env/.env
+/infra/env/.env.local
+/infra/env/.env.development
+/infra/env/.env.production

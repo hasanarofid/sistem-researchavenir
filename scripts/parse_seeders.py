@@ -1,3 +1,5 @@
+# Run this script from the repository root:
+# python scripts/parse_seeders.py
 import re
 import json
 
