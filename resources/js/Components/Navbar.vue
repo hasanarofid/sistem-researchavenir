@@ -327,10 +327,10 @@ const handleLogout = () => {
 
 /* Dark glassmorphic override for landing page */
 .nav.nav-dark {
-  background: rgba(9, 11, 10, 0.75) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: #090b0a !important; /* Menyesuaikan warna dasar gelap template Anda */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important; /* Menghilangkan garis sekat */
   box-shadow: none !important;
 }
 .nav.nav-dark .nav-link {
