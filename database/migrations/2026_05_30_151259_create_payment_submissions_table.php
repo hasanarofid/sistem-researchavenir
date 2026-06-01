@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payment_submissions', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->uuid('id')->primary();
             $table->uuid('user_id');
             $table->string('paket');
             $table->integer('durasi_hari');
@@ -23,6 +23,10 @@ return new class extends Migration
             $table->text('admin_notes')->nullable();
             $table->string('user_email')->nullable();
             $table->string('user_nama')->nullable();
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('verified_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 

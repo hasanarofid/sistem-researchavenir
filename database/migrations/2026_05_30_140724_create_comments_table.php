@@ -10,13 +10,20 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('research_id')->index();
+            $table->uuid('research_meta_id')->index();
             $table->uuid('user_id')->index();
             $table->uuid('parent_id')->nullable()->index();
             $table->text('body')->nullable();
             $table->integer('like_count')->default(0);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('research_meta_id')->references('id')->on('research_metas')->onDelete('cascade');
+        });
+
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }
 

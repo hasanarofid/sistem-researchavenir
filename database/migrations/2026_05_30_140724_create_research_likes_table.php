@@ -10,9 +10,14 @@ return new class extends Migration
     {
         Schema::create('research_likes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('research_id')->index();
-            $table->uuid('user_id')->index();
-            $table->timestamp('created_at')->nullable();
+            $table->uuid('user_id');
+            $table->uuid('research_meta_id');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('research_meta_id')->references('id')->on('research_metas')->onDelete('cascade');
+            
+            $table->unique(['user_id', 'research_meta_id']);
         });
     }
 

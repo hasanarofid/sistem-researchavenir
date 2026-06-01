@@ -18,7 +18,7 @@ class HomeController extends Controller
     {
         $researches = Research::all();
         
-        return Inertia::render('Dashboard', [
+        return view('katalog', [
             'researches' => $researches
         ]);
     }
@@ -27,26 +27,27 @@ class HomeController extends Controller
     {
         $articles = Article::where('status', 'published')
             ->orderByDesc('published_at')
-            ->get()
-            ->map(function ($article) {
-                return [
-                    'id'           => $article->id,
-                    'title'        => $article->title,
-                    'slug'         => $article->slug,
-                    'category'     => $article->category,
-                    'badge'        => $article->badge,
-                    'excerpt'      => $article->excerpt,
-                    'cover_image'  => $article->cover_image,
-                    'author'       => $article->author,
-                    'published_at' => $article->published_at 
-                        ? $article->published_at->format('d M Y') 
-                        : null,
-                    'is_paid'      => (bool) $article->is_paid,
-                ];
-            });
-
-        return Inertia::render('Artikel', [
+            ->get();
+        
+        return view('artikel', [
             'articles' => $articles
+        ]);
+    }
+
+    public function adminDashboard()
+    {
+        $researches = Research::latest()->take(5)->get();
+        $articles = Article::latest()->take(5)->get();
+        
+        return view('admin.dashboard', [
+            'researches' => $researches,
+            'articles' => $articles,
+            'stats' => [
+                'users' => \App\Models\User::count() ?? 0,
+                'researches' => Research::count(),
+                'articles' => Article::count(),
+                'views' => 0
+            ]
         ]);
     }
 

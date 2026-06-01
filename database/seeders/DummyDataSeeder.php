@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class DummyDataSeeder extends Seeder
@@ -14,16 +15,18 @@ class DummyDataSeeder extends Seeder
     public function run(): void
     {
         // 0. Seed Users & Profiles
-        $userId = DB::table('users')->insertGetId([
+        $adminId = Str::uuid()->toString();
+        DB::table('users')->insert([
+            'id' => $adminId,
             'name' => 'Admin Avenir',
             'email' => 'admin@avenir.test',
-            'password' => bcrypt('password'),
+            'password' => Hash::make('password'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         DB::table('user_profiles')->insert([
-            'user_id' => $userId,
+            'user_id' => $adminId,
             'first_name' => 'Admin',
             'last_name' => 'Avenir',
             'phone_number' => '08123456789',

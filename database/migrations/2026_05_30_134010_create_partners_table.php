@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUuid('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('certification')->nullable();
             $table->json('specializations')->nullable();
             $table->string('portfolio_link')->nullable();

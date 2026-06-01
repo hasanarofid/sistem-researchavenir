@@ -10,6 +10,11 @@ use Inertia\Inertia;
 
 class AuthController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -36,6 +41,14 @@ class AuthController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && $user->is_migrated) {
+            return redirect()->route('password.migrate.setup')
+                ->with('migrated_email', $user->email)
+                ->with('info', 'Selamat datang di ekosistem baru ResearchAvenir! Harap perbarui password Anda demi keamanan dan kenyamanan akses.');
+        }
 
         if (Auth::attempt($request->only('email', 'password'), true)) {
             $request->session()->regenerate();

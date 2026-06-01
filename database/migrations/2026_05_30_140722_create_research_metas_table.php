@@ -9,9 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('research_metas', function (Blueprint $table) {
-            $table->string('research_id')->primary();
+            $table->uuid('id')->primary(); // UUID from Supabase
             $table->uuid('mitra_id')->nullable();
             $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->string('ticker')->nullable();
             $table->string('sector')->nullable();
             $table->string('type')->nullable();
@@ -20,6 +21,8 @@ return new class extends Migration
             $table->uuid('author_id')->nullable();
             $table->string('author_display_name')->nullable();
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
